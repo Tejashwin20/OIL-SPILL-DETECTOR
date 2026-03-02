@@ -1,313 +1,276 @@
-Oil Spill Detection Application - AWS Deployment Package
-Complete Production-Ready Deployment for AWS EC2
 
-📦 What's Included
-This package includes everything needed to deploy the Oil Spill Detection application to AWS EC2:
+🌊 Oil Spill Detection Application
+☁ Production-Ready AWS Deployment Package
 
-Infrastructure as Code (Terraform)
-✅ VPC with public/private subnets across multiple AZs
-✅ RDS MySQL with Multi-AZ, automated backups
-✅ EC2 Auto-Scaling Group with health checks
-✅ Application Load Balancer (ALB) with HTTPS support
-✅ S3 bucket for uploads with encryption
-✅ CloudWatch monitoring and alarms
-✅ Security Groups with least privilege
-✅ IAM roles with minimal permissions
+A fully containerized, cloud-native Oil Spill Detection platform with Infrastructure as Code using Terraform, Docker-based microservices, Auto Scaling, Load Balancing, monitoring, and enterprise-grade security.
+
+Version: 1.0
+Status: Production Ready ✅
+Last Updated: March 2026
+
+🚀 What This Package Includes
+🏗 Infrastructure as Code (Terraform)
+
+✅ VPC with public & private subnets across multiple AZs
+
+✅ RDS MySQL (Multi-AZ, automated backups)
+
+✅ EC2 Auto Scaling Group with health checks
+
+✅ Application Load Balancer (ALB) with HTTPS
+
+✅ S3 bucket (encrypted, versioned, private)
+
 ✅ NAT Gateway for private subnet internet access
-✅ AWS Secrets Manager integration
-Containerization (Docker)
-✅ Dockerfiles for all 3 applications
-✅ docker-compose.yml for local development
-✅ Nginx reverse proxy configuration
-✅ SSL/TLS support
-✅ Health checks and auto-restart
-Configuration Management
-✅ Environment templates (.env.example)
-✅ Centralized config.py for each app
-✅ Secrets management with AWS Secrets Manager
-✅ No hardcoded credentials
-Deployment Automation
-✅ Automated AWS infrastructure setup (Terraform)
-✅ Docker-based local deployment
-✅ EC2 user-data script for automatic setup
-✅ Production deployment scripts
-✅ CI/CD ready
-Documentation
-✅ Comprehensive deployment guide
-✅ Troubleshooting section
-✅ Security best practices
-✅ Monitoring & maintenance guide
-✅ Cost optimization tips
-🚀 Quick Start
-Option 1: Local Development with Docker
-# 1. Setup environment
-cp .env.example .env
-nano .env  # Edit configuration
 
-# 2. Deploy locally
+✅ CloudWatch monitoring & alarms
+
+✅ IAM roles (least privilege)
+
+✅ Security Groups with restricted access
+
+✅ AWS Secrets Manager integration
+
+🐳 Containerization (Docker)
+
+✅ Dockerfiles for all 3 applications
+
+✅ docker-compose.yml for local development
+
+✅ Nginx reverse proxy configuration
+
+✅ SSL/TLS support
+
+✅ Health checks & auto-restart policies
+
+⚙ Configuration Management
+
+✅ .env.example environment template
+
+✅ Centralized config.py in each application
+
+✅ No hardcoded credentials
+
+✅ AWS Secrets Manager for secure secrets handling
+
+🔄 Deployment Automation
+
+✅ Terraform automated infrastructure setup
+
+✅ Docker-based local deployment
+
+✅ EC2 user-data auto bootstrapping
+
+✅ Production deployment scripts
+
+✅ CI/CD ready structure
+
+🏗 Architecture Overview
+Internet Users
+       │
+       ▼
+AWS Certificate Manager (HTTPS)
+       │
+       ▼
+Application Load Balancer (ALB)
+       │
+       ▼
+EC2 Auto Scaling Group (1–3 Instances)
+       │
+       ├── RDS MySQL (Multi-AZ)
+       ├── S3 (Encrypted Upload Storage)
+       └── CloudWatch Monitoring
+🧩 Application Components
+1️⃣ Oil Spill Detection API
+
+Flask-based ML backend
+
+PyTorch model integration
+
+Image processing with OpenCV
+
+2️⃣ Oil Spill Portal
+
+User authentication (Google OAuth)
+
+Upload interface
+
+Dashboard view
+
+3️⃣ Real-Time Detection Service
+
+Continuous detection engine
+
+Streaming/Live prediction logic
+
+⚡ Quick Start
+🐳 Option 1: Local Development (Docker)
+1️⃣ Setup environment
+cp .env.example .env
+nano .env
+2️⃣ Deploy locally
 chmod +x scripts/deploy_docker.sh
 ./scripts/deploy_docker.sh
+3️⃣ Access Applications
 
-# 3. Access applications
-# - Oil Spill API: http://localhost:5000
-# - Portal: http://localhost:5001
-# - Real Time Detection: http://localhost:5002
-# - Nginx: https://localhost:443
-Option 2: Full AWS Deployment
-# 1. Install tools
-# - AWS CLI v2: https://aws.amazon.com/cli/
-# - Terraform: https://www.terraform.io/downloads.html
+Oil Spill API → http://localhost:5000
 
-# 2. Configure AWS credentials
+Portal → http://localhost:5001
+
+Real-Time Detection → http://localhost:5002
+
+Nginx HTTPS → https://localhost:443
+
+☁ Option 2: Full AWS Deployment
+1️⃣ Install Required Tools
+
+AWS CLI v2
+
+Terraform v1.0+
+
+Docker
+
+2️⃣ Configure AWS
 aws configure
-
-# 3. Setup infrastructure
+3️⃣ Setup Infrastructure
 cd terraform
 cp terraform.tfvars.example terraform.tfvars
-nano terraform.tfvars  # Edit with your values
+nano terraform.tfvars
 
 terraform init
 terraform plan
 terraform apply
-
-# 4. Deploy application
+4️⃣ Deploy Application
 chmod +x ../scripts/deploy.sh
 ../scripts/deploy.sh
-
-# 5. Get outputs
+5️⃣ Get Outputs
 terraform output
-📋 File Structure
+📁 Project Structure
 .
-├── .env.example                    # Environment template
-├── docker-compose.yml              # Docker Compose configuration
-├── Dockerfile.oil_spill            # Oil Spill Detection Dockerfile
-├── Dockerfile.portal               # Portal App Dockerfile
-├── Dockerfile.realtime             # Real Time Detection Dockerfile
-├── nginx.conf                      # Nginx reverse proxy config
-├── DEPLOYMENT_GUIDE.md             # Comprehensive guide
-├── README.md                       # This file
+├── docker-compose.yml
+├── nginx.conf
+├── README.md
+├── DEPLOYMENT_GUIDE.md
 │
 ├── terraform/
-│   ├── main.tf                     # VPC, RDS, S3, IAM setup
-│   ├── ec2.tf                      # EC2, ASG, ALB, CloudWatch
-│   ├── variables.tf                # Variable definitions
-│   ├── outputs.tf                  # Output definitions
-│   ├── user_data.sh               # EC2 initialization script
-│   ├── terraform.tfvars.example   # Terraform variables template
-│   └── backend.tf                  # S3 state backend (auto-generated)
+│   ├── main.tf
+│   ├── ec2.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   └── user_data.sh
 │
 ├── scripts/
-│   ├── deploy.sh                   # AWS infrastructure deployment
-│   ├── deploy_docker.sh            # Docker local deployment
-│   ├── production_deploy.sh        # Production EC2 deployment
-│   └── README.md                   # Scripts documentation
+│   ├── deploy.sh
+│   ├── deploy_docker.sh
+│   └── production_deploy.sh
 │
-├── ODA(OIL)/oil_spill_detection/   # Oil Spill Detection App
-│   └── oil_spill_detection/
-│       ├── app.py                  # Main Flask app
-│       ├── config.py               # Configuration (NEW)
-│       ├── requirements.txt        # Python dependencies
-│       └── ... (other files)
-│
-├── OilSpillPortal/                 # Portal Application
-│   ├── portal_app.py              # Main Flask app
-│   ├── config.py                  # Configuration (NEW)
-│   ├── templates/                 # User signup/login
-│   └── ... (other files)
-│
-└── RealTimeDetection/              # Real Time Detection
-    ├── app.py                      # Main Flask app
-    ├── config.py                   # Configuration (NEW)
-    ├── detector.py                 # Detection logic
-    └── ... (other files)
-🔧 Technologies & Architecture
-Infrastructure
-Cloud: AWS (EC2, RDS, S3, VPC, ALB, CloudWatch)
-IaC: Terraform
-Containerization: Docker & Docker Compose
-Reverse Proxy: Nginx
-Monitoring: CloudWatch Logs, Metrics, Alarms
-Application Stack
-Framework: Flask 2.3
-Database: MySQL 8.0 (RDS)
-ML Framework: PyTorch
-Image Processing: OpenCV
-API Integration: Google OAuth, Roboflow
-Deployment
-Auto Scaling: EC2 Auto Scaling Group
-Load Balancing: Application Load Balancer
-Health Checks: ALB + CloudWatch
-Logging: CloudWatch Logs
-⚙️ Configuration Reference
-Environment Variables
-Create .env file from .env.example:
-
-# Database (RDS)
-DB_HOST=your-rds-endpoint.rds.amazonaws.com
-DB_PORT=3306
-DB_USER=oil_spill_user
-DB_PASSWORD=SECURE_PASSWORD_MIN_16_CHARS
-
-# Flask
-FLASK_ENV=production
-FLASK_SECRET_KEY=generate_with_secrets.token_hex(32)
-FLASK_DEBUG=False
-
-# AWS
-AWS_REGION=us-east-1
-AWS_REGION=us-east-1
-AWS_S3_BUCKET=your-bucket-name
-
-# Google OAuth (Portal)
-GOOGLE_CLIENT_ID=xxx.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=xxxxx
-
-# Roboflow (Oil Detection Models)
-ROBOFLOW_API_KEY=xxxxx
-Terraform Variables
-Edit terraform/terraform.tfvars:
-
-aws_region       = "us-east-1"
-app_name         = "oil-spill-app"
-environment      = "prod"
-instance_type    = "t3.medium"
-instance_count   = 1
-db_instance_type = "db.t3.small"
-db_password      = "VERY_SECURE_PASSWORD"
-s3_bucket_name   = "unique-bucket-name"
-ssh_allowed_cidrs = ["YOUR_IP/32"]
-📊 Architecture Overview
-┌─────────────────────────────────────────────────────┐
-│                    Internet Users                     │
-└──────────────────────┬──────────────────────────────┘
-                       │
-                       ▼
-         ┌─────────────────────────────┐
-         │   AWS Certificate Manager   │
-         │        (HTTPS/SSL)          │
-         └──────────┬──────────────────┘
-                    │
-                    ▼
-         ┌─────────────────────────┐
-         │  Application Load       │
-         │     Balancer (ALB)      │
-         │   (Health Checks)       │
-         └──────────┬──────────────┘
-                    │
-        ┌───────────┼───────────┐
-        ▼           ▼           ▼
-   ┌─────────┐ ┌─────────┐ ┌─────────┐
-   │   EC2   │ │   EC2   │ │   EC2   │  (Auto-Scaling)
-   │Instance │ │Instance │ │Instance │  (Min 1, Max 3)
-   └────┬────┘ └────┬────┘ └────┬────┘
-        │           │           │
-        └───────────┼───────────┘
-                    │
-        ┌───────────┴───────────┐
-        ▼                       ▼
-   ┌─────────────┐         ┌──────────┐
-   │   RDS MySQL │         │ S3 Bucket│
-   │  (Multi-AZ) │         │(Uploads) │
-   │  Automated  │         │Versioned │
-   │  Backups    │         │Encrypted │
-   └─────────────┘         └──────────┘
-        │
-   ┌────────────────────────────────────┐
-   │    CloudWatch Logs & Metrics        │
-   │    Monitoring & Alarms             │
-   └────────────────────────────────────┘
+├── OilSpillPortal/
+├── RealTimeDetection/
+└── ODA(OIL)/oil_spill_detection/
 🔒 Security Features
-✅ Network Isolation: VPC with public/private subnets
-✅ Database: RDS Multi-AZ, encryption at rest
-✅ Credentials: AWS Secrets Manager integration
-✅ SSL/TLS: HTTPS with ACM certificates
-✅ IAM: Least privilege access
-✅ Firewall: Security groups restrict traffic
-✅ Backups: Automated RDS snapshots
-✅ Logging: CloudWatch logs for audit trail
-✅ Updates: Automatic security patches
-✅ S3: Bucket encryption, versioning, block public access
-📈 Monitoring & Observability
+
+VPC network isolation
+
+Private RDS database
+
+IAM least privilege roles
+
+AWS Secrets Manager
+
+HTTPS via ACM
+
+S3 encryption & versioning
+
+Automated RDS backups
+
+CloudWatch logging
+
+Restricted security groups
+
+📊 Monitoring & Observability
 CloudWatch Dashboards
-CPU utilization (EC2 & RDS)
+
+EC2 CPU utilization
+
+RDS performance metrics
+
 Memory usage
-Disk space
+
 Network traffic
+
 Application logs
-Alarms
-High CPU (EC2 & RDS)
+
+Alerts & Alarms
+
+High CPU
+
 Low disk space
-Unhealthy targets
+
+Unhealthy ALB targets
+
 Failed deployments
-Logs
-Application logs: /app/static/logs/
-Docker logs: docker-compose logs -f
-CloudWatch: /aws/ec2/oil-spill-app
-💰 Estimated AWS Costs (Monthly)
-Component	Instance Type	Est. Cost
-EC2	t3.medium (1)	$30
-RDS	db.t3.small	$50
-NAT Gateway	-	$40
-Data Transfer	100GB	$20
-CloudWatch	Logs + Metrics	$10
-Total		~$150
-Prices vary by region. Use AWS Cost Calculator for accurate estimates.
 
-🆘 Need Help?
-Read: DEPLOYMENT_GUIDE.md - Comprehensive guide
-Check: Troubleshooting section in deployment guide
-Logs: View CloudWatch logs or Docker logs for errors
-AWS Console: Check EC2, RDS, CloudWatch dashboards
-Support: AWS Support (Business/Enterprise plans)
-📝 Pre-Deployment Checklist
- AWS account created and configured
- IAM user with EC2, RDS, S3 permissions created
- EC2 key pair created and downloaded
- .env.example reviewed and customized
- terraform.tfvars.example reviewed and customized
- Google OAuth credentials obtained (if using portal)
- Roboflow API key obtained
- Database credentials secure and unique
- AWS CLI installed and configured
- Terraform installed (v1.0+)
- Docker & Docker Compose installed
- SSH access tested from your IP
-🚀 Next Steps
-Local Testing: Deploy locally with Docker first
-Review Security: Audit .env and security groups
-Cost Estimation: Use AWS Cost Calculator
-Deploy to AWS: Run Terraform scripts
-Configure Domain: Point DNS to ALB
-Enable HTTPS: Create ACM certificate
-Monitor: Set up CloudWatch dashboards
-Backup: Enable automated RDS snapshots
-Scale: Configure auto-scaling policies
-Maintain: Regular updates and patches
+💰 Estimated Monthly AWS Cost
+Component	Type	Est. Cost
+EC2	t3.medium	~$30
+RDS	db.t3.small	~$50
+NAT Gateway	-	~$40
+Data Transfer	100GB	~$20
+CloudWatch	Logs & Metrics	~$10
+Total		~$150/month
+
+Costs vary by region. Use AWS Cost Calculator for exact pricing.
+
+📋 Pre-Deployment Checklist
+
+AWS account configured
+
+IAM user created
+
+EC2 key pair created
+
+.env configured
+
+terraform.tfvars configured
+
+Google OAuth credentials
+
+Roboflow API key
+
+AWS CLI installed
+
+Terraform installed
+
+Docker installed
+
+SSH access tested
+
+🔮 Future Improvements
+
+CI/CD pipeline (GitHub Actions)
+
+Kubernetes (EKS) migration
+
+Blue/Green deployment
+
+Model retraining pipeline
+
+Cost optimization automation
+
 📚 Documentation
-DEPLOYMENT_GUIDE.md - Complete deployment guide
-nginx.conf - Reverse proxy configuration
-Terraform Variables - Infrastructure options
-Docker Compose Docs
-AWS Documentation
-📄 License & Support
-Deployment package created for Oil Spill Detection Application
 
-Version: 1.0
-Last Updated: March 1, 2026
-Status: Production Ready ✅
-Languages
-HTML
-46.8%
- Python
-39.2%
-HCL
-6.7%
-Shell
-4.0%
- 
-CSS
-3.3%
-Footer
-© 2026 GitHub, Inc.
-Footer navigation
-Term
+DEPLOYMENT_GUIDE.md – Complete AWS guide
+
+nginx.conf – Reverse proxy setup
+
+terraform/ – Infrastructure config
+
+scripts/ – Deployment automation
+
+👩‍💻 Maintainer
+
+Tejashwini Pilli
+
+📄 License
+
+This deployment package is developed for academic, research, and production cloud deployment use.
