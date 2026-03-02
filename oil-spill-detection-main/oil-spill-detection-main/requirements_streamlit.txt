@@ -1,0 +1,13 @@
+streamlit
+numpy
+opencv-python
+torch
+torchvision
+scipy
+matplotlib
+Pillow
+roboflow
+scikit-learn
+requests
+tqdm
+pandas

@@ -1,0 +1,14 @@
+streamlit
+numpy
+opencv-python-headless
+torch
+torchvision
+scipy
+matplotlib
+Pillow
+roboflow
+scikit-learn
+requests
+tqdm
+pandas
+python-dotenv
